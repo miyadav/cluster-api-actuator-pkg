@@ -756,9 +756,6 @@ github.com/openshift/cluster-api-actuator-pkg/testutils/resourcebuilder/core/v1
 github.com/openshift/cluster-autoscaler-operator/pkg/apis
 github.com/openshift/cluster-autoscaler-operator/pkg/apis/autoscaling/v1
 github.com/openshift/cluster-autoscaler-operator/pkg/apis/autoscaling/v1beta1
-# github.com/openshift/cluster-capi-operator/e2e v0.0.0-20241106203946-d1a552850961
-## explicit; go 1.22.0
-github.com/openshift/cluster-capi-operator/e2e/framework
 # github.com/openshift/library-go v0.0.0-20240919205913-c96b82b3762b
 ## explicit; go 1.22.0
 github.com/openshift/library-go/pkg/config/clusteroperator/v1helpers

@@ -12,7 +12,6 @@ require (
 	github.com/openshift/api v0.0.0-20240924155631-232984653385
 	github.com/openshift/cluster-api-actuator-pkg/testutils v0.0.0-20240626103413-ddea9c7c0aca
 	github.com/openshift/cluster-autoscaler-operator v0.0.1-0.20240509123215-40cadf8a4729
-	github.com/openshift/cluster-capi-operator/e2e v0.0.0-20241106203946-d1a552850961
 	github.com/openshift/library-go v0.0.0-20240919205913-c96b82b3762b
 	github.com/openshift/machine-api-operator v0.2.1-0.20240924183942-9c3e4a04009a
 	k8s.io/api v0.31.1

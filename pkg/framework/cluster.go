@@ -1,6 +1,8 @@
 package framework
 
 import (
+	"context"
+
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	corev1 "k8s.io/api/core/v1"
@@ -11,35 +13,23 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-// CreateCluster creates a cluster with the given name and returns the cluster object.
-func CreateCoreCluster(cl client.Client, clusterName, infraClusterKind string) *clusterv1.Cluster {
+// CreateCoreCluster creates a cluster with the given name and returns the cluster object.
+func CreateCoreCluster(ctx context.Context, cl client.Client, clusterName, infraClusterKind string) *clusterv1.Cluster {
 	By("Creating core cluster")
 
 	cluster := &clusterv1.Cluster{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      clusterName,
-			Namespace: CAPINamespace,
+			Namespace: ClusterAPINamespace,
 		},
 		Spec: clusterv1.ClusterSpec{
 			InfrastructureRef: &corev1.ObjectReference{
 				APIVersion: "infrastructure.cluster.x-k8s.io/v1beta1",
 				Kind:       infraClusterKind,
 				Name:       clusterName,
-				Namespace:  CAPINamespace,
+				Namespace:  ClusterAPINamespace,
 			},
 		},
-	}
-	// TODO(damdo): is there a way to avoid doing this in the generic framework?
-	if infraClusterKind == "VSphereCluster" {
-		host, port, err := GetControlPlaneHostAndPort(cl)
-		if err != nil {
-			Expect(err).ToNot(HaveOccurred())
-		}
-
-		cluster.Spec.ControlPlaneEndpoint = clusterv1.APIEndpoint{
-			Host: host,
-			Port: port,
-		}
 	}
 
 	if err := cl.Create(ctx, cluster); err != nil && !apierrors.IsAlreadyExists(err) {
